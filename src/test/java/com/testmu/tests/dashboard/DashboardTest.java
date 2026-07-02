@@ -15,7 +15,7 @@ public class DashboardTest extends BaseUITest {
 
     @BeforeMethod(alwaysRun = true)
     public void loginBeforeDashboardTests(Method method) {
-        if (!method.getName().equals("testAccessDashboardWithoutLogin")) {
+        if (!method.getName().equals("testAccessDashboardWithoutLogin") && driver != null) {
             new LoginPage(driver).loginAs(config.validUsername(), config.validPassword());
         }
     }
