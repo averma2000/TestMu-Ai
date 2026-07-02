@@ -1,0 +1,33 @@
+{
+  "module": "login",
+  "className": "GeneratedLoginTest",
+  "baseClass": "BaseUITest",
+  "imports": [
+    "com.testmu.pages.LoginPage",
+    "com.testmu.pages.DashboardPage",
+    "com.testmu.testdata.TestUsers"
+  ],
+  "tests": [
+    {
+      "methodName": "testGeneratedValidLogin",
+      "description": "Valid credentials should redirect to inventory dashboard",
+      "groups": ["login", "pass", "generated"],
+      "scenario": "pass",
+      "methodBody": "LoginPage loginPage = new LoginPage(driver);\nAssert.assertTrue(loginPage.isDisplayed(), \"Login page should be displayed\");\nDashboardPage dashboard = loginPage.loginAs(config.validUsername(), config.validPassword());\nAssert.assertTrue(dashboard.isLoaded(), \"Dashboard should load after successful login\");"
+    },
+    {
+      "methodName": "testGeneratedEmptyUsername",
+      "description": "Empty username should show validation error",
+      "groups": ["login", "edge", "generated"],
+      "scenario": "edge",
+      "methodBody": "LoginPage loginPage = new LoginPage(driver);\nloginPage.enterUsername(\"\");\nloginPage.enterPassword(config.validPassword());\nloginPage.clickLogin();\nAssert.assertTrue(loginPage.isErrorDisplayed(), \"Error should be displayed\");\nAssert.assertEquals(loginPage.getErrorMessage(), \"Epic sadface: Username is required\");"
+    },
+    {
+      "methodName": "testGeneratedInvalidPassword",
+      "description": "Invalid password should show authentication error",
+      "groups": ["login", "fail", "generated"],
+      "scenario": "fail",
+      "methodBody": "LoginPage loginPage = new LoginPage(driver);\nloginPage.loginAs(config.validUsername(), TestUsers.INVALID_PASSWORD);\nAssert.assertTrue(loginPage.isErrorDisplayed(), \"Error should be displayed\");\nAssert.assertTrue(loginPage.getErrorMessage().contains(\"do not match any user\"));"
+    }
+  ]
+}

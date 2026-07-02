@@ -1,0 +1,33 @@
+{
+  "module": "api",
+  "className": "GeneratedRestApiTest",
+  "baseClass": "BaseAPITest",
+  "imports": [
+    "com.testmu.api.ApiResponse",
+    "com.testmu.utils.ApiAssertionHelper",
+    "java.util.Map"
+  ],
+  "tests": [
+    {
+      "methodName": "testGeneratedGetSuccess",
+      "description": "GET /get should return 200 with metadata",
+      "groups": ["api", "pass", "generated"],
+      "scenario": "pass",
+      "methodBody": "ApiResponse response = apiClient.get(\"/get\");\nApiAssertionHelper.assertStatusCode(response, 200);\nAssert.assertNotNull(response.body());\nAssert.assertTrue(response.body().get(\"url\").asText().contains(\"httpbin.org/get\"));"
+    },
+    {
+      "methodName": "testGeneratedGetWithQueryParams",
+      "description": "GET /get with query params should echo args",
+      "groups": ["api", "edge", "generated"],
+      "scenario": "edge",
+      "methodBody": "ApiResponse response = apiClient.get(\"/get\", Map.of(\"page\", \"1\", \"limit\", \"5\"));\nApiAssertionHelper.assertStatusCode(response, 200);\nAssert.assertEquals(response.body().get(\"args\").get(\"page\").asText(), \"1\");"
+    },
+    {
+      "methodName": "testGeneratedNotFound",
+      "description": "GET /status/404 should return 404",
+      "groups": ["api", "fail", "generated"],
+      "scenario": "fail",
+      "methodBody": "ApiResponse response = apiClient.get(\"/status/404\");\nApiAssertionHelper.assertStatusCode(response, 404);"
+    }
+  ]
+}

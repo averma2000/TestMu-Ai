@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TestMu AI Suite" parallel="false" verbose="1">
+    <listeners>
+        <listener class-name="com.testmu.core.SuiteListener"/>
+    </listeners>
+
+    <test name="Login Tests">
+        <groups>
+            <run>
+                <include name="login"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.testmu.tests.login.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="Dashboard Tests">
+        <groups>
+            <run>
+                <include name="dashboard"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.testmu.tests.dashboard.DashboardTest"/>
+        </classes>
+    </test>
+
+    <test name="REST API Tests">
+        <groups>
+            <run>
+                <include name="api"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.testmu.tests.api.RestApiTest"/>
+        </classes>
+    </test>
+
+    <test name="Generated Tests (optional)">
+        <groups>
+            <run>
+                <include name="generated"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.testmu.tests.generated.GeneratedLoginTest"/>
+            <class name="com.testmu.tests.generated.GeneratedDashboardTest"/>
+            <class name="com.testmu.tests.generated.GeneratedRestApiTest"/>
+        </classes>
+    </test>
+</suite>

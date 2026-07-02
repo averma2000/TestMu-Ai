@@ -1,0 +1,33 @@
+{
+  "module": "dashboard",
+  "className": "GeneratedDashboardTest",
+  "baseClass": "BaseUITest",
+  "imports": [
+    "com.testmu.pages.LoginPage",
+    "com.testmu.pages.DashboardPage",
+    "java.util.List"
+  ],
+  "tests": [
+    {
+      "methodName": "testGeneratedDashboardProducts",
+      "description": "Dashboard should display products after login",
+      "groups": ["dashboard", "pass", "generated"],
+      "scenario": "pass",
+      "methodBody": "new LoginPage(driver).loginAs(config.validUsername(), config.validPassword());\nDashboardPage dashboard = new DashboardPage(driver);\nAssert.assertTrue(dashboard.isLoaded(), \"Dashboard should be loaded\");\nAssert.assertEquals(dashboard.getProductCount(), 6, \"Sauce Demo lists 6 products\");"
+    },
+    {
+      "methodName": "testGeneratedSortLowToHigh",
+      "description": "Sorting low to high should put cheapest product first",
+      "groups": ["dashboard", "edge", "generated"],
+      "scenario": "edge",
+      "methodBody": "new LoginPage(driver).loginAs(config.validUsername(), config.validPassword());\nDashboardPage dashboard = new DashboardPage(driver);\ndashboard.sortBy(\"lohi\");\nList<String> names = dashboard.getProductNames();\nAssert.assertEquals(names.get(0), \"Sauce Labs Onesie\");"
+    },
+    {
+      "methodName": "testGeneratedUnauthenticatedAccess",
+      "description": "Direct inventory access without login should redirect",
+      "groups": ["dashboard", "fail", "generated"],
+      "scenario": "fail",
+      "methodBody": "driver.get(config.baseUrl() + \"inventory.html\");\nLoginPage loginPage = new LoginPage(driver);\nAssert.assertTrue(loginPage.isDisplayed(), \"Login page should be shown\");\nAssert.assertFalse(driver.getCurrentUrl().contains(\"inventory.html\"));"
+    }
+  ]
+}
