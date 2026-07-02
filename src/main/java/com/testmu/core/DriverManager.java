@@ -71,6 +71,8 @@ public final class DriverManager {
                 options.addArguments(
                         "--disable-gpu",
                         "--no-sandbox",
+                        "--disable-dev-shm-usage",
+                        "--remote-allow-origins=*",
                         "--window-size=1920,1080",
                         "--disable-notifications",
                         "--disable-infobars"
@@ -85,7 +87,9 @@ public final class DriverManager {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(config.implicitWaitSeconds()));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(config.pageLoadTimeoutSeconds()));
-        driver.manage().window().maximize();
+        if (!config.headless()) {
+            driver.manage().window().maximize();
+        }
         return driver;
     }
 }

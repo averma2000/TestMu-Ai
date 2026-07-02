@@ -20,6 +20,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
       - name: Run tests (headless)
         run: mvn test -Dheadless=true -B
         env:
